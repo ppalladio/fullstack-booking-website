@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-export const Logo = () => {
+ const Logo = () => {
     const router = useRouter();
 
     return (
@@ -10,8 +10,9 @@ export const Logo = () => {
             className="hidden md:block cursor-pointer"
             height="100"
             width="100"
-            src="../../../public/images/logo.png"
+            src="/images/logo.png"
             alt="logo"
         />
     );
 };
+export default Logo;

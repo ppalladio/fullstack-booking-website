@@ -1,6 +1,7 @@
 'use client';
 import Avatar from '../Avatar';
 import { AiOutlineMenu } from 'react-icons/ai';
+import MenuItem from './MenuItem';
 
 import { useCallback, useState } from 'react';
 const UserMenu = () => {
@@ -20,7 +21,7 @@ const UserMenu = () => {
                 </div>
                 <div
                     className="p-4 md:py-1 md:px-2 border-neutral-200 border-[1px] flex flex-row items-center gap-3 rounded-ful cursor-pointer hover:shadow-md transition"
-                    onClick={() => {}}
+                    onClick={toggleOpen}
                 >
                     <AiOutlineMenu />
                     <div className="hidden md:block">
@@ -28,6 +29,16 @@ const UserMenu = () => {
                     </div>
                 </div>
             </div>
+            {open && (
+                <div className="absolute rounded-xl shadow-md overflow-hidden right-0 top-12 text-sm md:w-3/4 bg-white w-[40vw]">
+                    <div className="flex flex-col cursor-pointer">
+                        <>
+                            <MenuItem onClick={() => {}} label="Login" />
+                            <MenuItem onClick={() => {}} label="Sign Up" />
+                        </>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

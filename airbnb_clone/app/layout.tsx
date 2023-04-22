@@ -1,26 +1,30 @@
-import {Montserrat} from "next/font/google"
+import { Montserrat } from 'next/font/google';
 
-import './globals.css'
-import { Navbar } from "./components/navbar/Navbar"
-
+import './globals.css';
+import { Navbar } from './components/navbar/Navbar';
+import ClientOnly from './components/ClientOnly';
+import Modal from './components/modals/Modal';
 export const metadata = {
-  title: 'Airbnb',
-  description: 'Airbnb Clone',
-}
-const font = Montserrat(
-	{
-		subsets:["latin"]
-	} 
-)
+    title: 'Airbnb',
+    description: 'Airbnb Clone',
+};
+const font = Montserrat({
+    subsets: ['latin'],
+});
 export default function RootLayout({
-  children,
+    children,
 }: {
-  children: React.ReactNode
+    children: React.ReactNode;
 }) {
-  return (
-    <html lang="en">
-      <body className={font.className}>
-		<Navbar/>{children}</body>
-    </html>
-  )
+    return (
+        <html lang="en">
+            <body className={font.className}>
+                <ClientOnly>
+					<Modal isOpen/>
+                    <Navbar />
+                </ClientOnly>
+                {children}
+            </body>
+        </html>
+    );
 }

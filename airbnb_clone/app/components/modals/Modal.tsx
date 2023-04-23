@@ -1,6 +1,6 @@
 'use client';
 import { useCallback, useEffect, useState } from 'react';
-import {IoMdClose} from 'react-icons/io'
+import { IoMdClose } from 'react-icons/io';
 import Button from '../Button';
 interface ModalProps {
     isOpen?: boolean;
@@ -12,7 +12,7 @@ interface ModalProps {
     actionLabel: string;
     disabled?: boolean;
     secondaryAction?: () => void;
-    secondaryLabel?: string;
+    secondaryActionLabel?: string;
 }
 
 const Modal: React.FC<ModalProps> = ({
@@ -25,7 +25,7 @@ const Modal: React.FC<ModalProps> = ({
     actionLabel,
     disabled,
     secondaryAction,
-    secondaryLabel,
+    secondaryActionLabel,
 }) => {
     const [showModal, setShowModal] = useState(isOpen);
 
@@ -63,7 +63,7 @@ const Modal: React.FC<ModalProps> = ({
 
     return (
         <>
-            <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none bg-neutral-800/70">
+            <div className="justify-center items-center flex overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none capitalize focus:outline-none bg-neutral-800/70">
                 <div className="relative w-full md:w-4/6 lg:w-3/6 xl:w-2/6 my-6 mx-auto h-full lg:h-auto md:h-auto">
                     {/*//@ content */}
                     <div
@@ -73,28 +73,38 @@ const Modal: React.FC<ModalProps> = ({
                     >
                         <div className="translate h-full lg:h-auto md:h-auto border-0 rounded-lg shadow-lg flex flex-col bg-white focus:outline-line">
                             {/*//@ header */}
-							<div className='flex items-center p-6 rounded-t relative justify-center border-b-[1px]'>
-								<button onClick={handleClose} className='p-1 border-0 hover:opacity-70 transition absolute left-9'>
-									<IoMdClose />
-								</button>
-								<div className='text-lg font-semibold'>
+                            <div className="flex items-center p-6 rounded-t relative justify-center border-b-[1px]">
+                                <button
+                                    onClick={handleClose}
+                                    className="p-1 border-0 hover:opacity-70 transition absolute left-9"
+                                >
+                                    <IoMdClose />
+                                </button>
+                                <div className="text-lg font-semibold">
                                     {title}
-								</div>
-							</div>
-							{/*//@ body */}
-							<div
-							className='relative p-6 flex-auto'
-							>
-								{body}
-							</div>
-							{/* footer */}
-							<div className='flex flex-col gap-2 p-6'>
-							<div className='flex flex-row items-center gap-4 w-full'>
-
-							<Button label='reserve'/>
-
-							</div>
-							</div>
+                                </div>
+                            </div>
+                            {/*//@ body */}
+                            <div className="relative p-6 flex-auto">{body}</div>
+                            {/* footer */}
+                            <div className="flex flex-col gap-2 p-6">
+                                <div className="flex flex-row items-center gap-4 w-full">
+                                    {secondaryAction &&
+                                        secondaryActionLabel && (
+                                            <Button
+                                                outline
+                                                disabled={disabled}
+                                                label={secondaryActionLabel}
+                                                onClick={handleSecondaryAction}
+                                            />
+                                        )}
+                                    <Button
+                                        disabled={disabled}
+                                        label={actionLabel}
+                                        onClick={handleSubmit}
+                                    />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

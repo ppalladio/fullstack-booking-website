@@ -8,7 +8,7 @@ import useRegisterModal from '../../hooks/useRegisterModal';
 import { useState } from 'react';
 import Modal from './Modal';
 const RegisterModal = () => {
-    const RegisterModal = useRegisterModal();
+    const registerModal = useRegisterModal();
     const [isLoading, setIsLoading] = useState(false);
     const {
         register,
@@ -27,7 +27,7 @@ const RegisterModal = () => {
         axios
             .post('/api/register', data)
             .then(() => {
-                RegisterModal.onClose();
+                registerModal.onClose();
             })
             .catch((error) => {
                 console.log(error);
@@ -36,7 +36,16 @@ const RegisterModal = () => {
                 setIsLoading(false);
             });
     };
-    return <Modal/>;
+    return (
+        <Modal
+            disabled={isLoading}
+            isOpen={registerModal.isOpen}
+            title="Register"
+            actionLabel="Continue"
+            onClose={registerModal.onClose}
+            onSubmit={handleSubmit(onSubmit)}
+        />
+    );
 };
 
 export default RegisterModal;

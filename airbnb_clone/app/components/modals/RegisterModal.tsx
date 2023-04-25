@@ -39,12 +39,19 @@ const RegisterModal = () => {
             });
     };
 
-	const bodyContent=(
-		<div className='flex flex-col gap-4 capitalize'>
-			<Heading title='welcome to airbnb' subtitle='create an account'/>
-			<Input/>
-		</div>
-	)
+    const bodyContent = (
+        <div className="flex flex-col gap-4 capitalize">
+            <Heading title="welcome to airbnb" subtitle="create an account" />
+            <Input
+                id="email"
+                label="email"
+                disabled={isLoading}
+                register={register}
+                errors={errors}
+                required
+            />
+        </div>
+    );
     return (
         <Modal
             disabled={isLoading}
@@ -53,7 +60,7 @@ const RegisterModal = () => {
             actionLabel="Continue"
             onClose={registerModal.onClose}
             onSubmit={handleSubmit(onSubmit)}
-			body={bodyContent}
+            body={bodyContent}
         />
     );
 };

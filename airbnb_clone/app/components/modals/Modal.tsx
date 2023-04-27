@@ -71,21 +71,21 @@ const Modal: React.FC<ModalProps> = ({
                             showModal ? 'translate-y-0' : 'translate-y-full'
                         }${showModal ? 'opacity-100' : 'opacity-0'}`}
                     >
-                        <div className="translate h-full lg:h-auto md:h-auto border-0 rounded-lg shadow-lg flex flex-col bg-white focus:outline-line">
+                        <div className="translate h-full lg:h-auto md:h-auto border-0 rounded-lg shadow-lg relative flex w-full flex-col bg-white outline-none focus:outline-none">
                             {/*//@ header */}
                             <div className="flex items-center p-6 rounded-t relative justify-center border-b-[1px]">
                                 <button
                                     onClick={handleClose}
                                     className="p-1 border-0 hover:opacity-70 transition absolute left-9"
                                 >
-                                    <IoMdClose />
+                                    <IoMdClose size={18} />
                                 </button>
-                                <div className="text-lg font-semibold">
+                                <div className="text-lg font-semibold capitalize">
                                     {title}
                                 </div>
                             </div>
                             {/*//@ body */}
-                            <div className="relative p-6 flex-auto">{body}</div>
+                            <div className="relative p-6 flex-auto capitalize">{body}</div>
                             {/* footer */}
                             <div className="flex flex-col gap-2 p-6">
                                 <div className="flex flex-row items-center gap-4 w-full">

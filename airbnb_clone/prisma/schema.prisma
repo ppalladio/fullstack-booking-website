@@ -29,16 +29,16 @@ model User{
 
 model Account {
 	id String @id @default(auto()) @map("_id") @db.ObjectId
-	userId String @db.objectId
+	userId String @db.ObjectId
 	type String
 	provider String
 	providerAccountId String
-	refresh_token String? @db.string
-	access_token String? @db.string
+	refresh_token String? @db.String
+	access_token String? @db.String
 	expires_at Int?
 	token_type String?
 	scope String?
-	id_token String? @db.string
+	id_token String? @db.String
 	seesion_state String?
 	
 	user User @relation(fields:[userId],references:[id],onDelete:Cascade)
@@ -66,8 +66,8 @@ model Listing {
 
 model Reservation {
 	id String @id @default(auto()) @map("_id") @db.ObjectId
-	userId String @db.objectId
-	listingId String @db.objectId
+	userId String @db.ObjectId
+	listingId String @db.ObjectId
 	startDate DateTime
 	endDate DateTime
 	totalPrice Int
@@ -76,3 +76,4 @@ model Reservation {
 	user User @relation(fields:[userId], references:[id], onDelete:Cascade)
 	listing Listing @relation(fields:[listingId],references:[id], onDelete:Cascade)
 }
+//npx prisma db push

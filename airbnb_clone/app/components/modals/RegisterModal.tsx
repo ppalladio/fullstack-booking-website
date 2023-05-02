@@ -11,6 +11,7 @@ import Heading from '../Heading';
 import Input from '../inputs/Input';
 import { toast } from 'react-hot-toast';
 import Button from '../Button';
+import { signIn } from 'next-auth/react';
 
 const RegisterModal = () => {
     const registerModal = useRegisterModal();
@@ -81,24 +82,25 @@ const RegisterModal = () => {
                 label="continue with google"
                 icon={FcGoogle}
                 onClick={() => {}}
-            /> <Button
-			outline
-			label="continue with github"
-			icon={AiFillGithub}
-			onClick={() => {}}
-		/> 
-		<div className='text-neutral-500 text-center mt-4 font-light'>
-<div className='flex flex-row items-center gap-2 capitalize justify-center'>
-	<div>
-		already have an account?
-	</div>
-	<div onClick={registerModal.onClose} className='text-neutral-800 cursor-pointer hover:underline'>
-		log in
-	</div>
-</div>
-		</div>
+            />{' '}
+            <Button
+                outline
+                label="continue with github"
+                icon={AiFillGithub}
+                onClick={() => signIn('github')}
+            />
+            <div className="text-neutral-500 text-center mt-4 font-light">
+                <div className="flex flex-row items-center gap-2 capitalize justify-center">
+                    <div>already have an account?</div>
+                    <div
+                        onClick={registerModal.onClose}
+                        className="text-neutral-800 cursor-pointer hover:underline"
+                    >
+                        log in
+                    </div>
+                </div>
+            </div>
         </div>
-		
     );
     return (
         <Modal
@@ -109,7 +111,7 @@ const RegisterModal = () => {
             onClose={registerModal.onClose}
             onSubmit={handleSubmit(onSubmit)}
             body={bodyContent}
-			footer={footerContent}
+            footer={footerContent}
         />
     );
 };

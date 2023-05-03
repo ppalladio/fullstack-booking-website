@@ -75,14 +75,14 @@ const RegisterModal = () => {
     );
 
     const footerContent = (
-        <div className="flex-col flex gap-4 mt-3">
+        <div className="flex-col flex gap-4 mt-3 capitalize">
             <hr />
             <Button
                 outline
                 label="continue with google"
                 icon={FcGoogle}
                 onClick={() => {}}
-            />{' '}
+            />
             <Button
                 outline
                 label="continue with github"

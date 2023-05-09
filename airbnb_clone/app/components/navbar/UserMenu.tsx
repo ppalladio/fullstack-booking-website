@@ -9,27 +9,29 @@ import useLoginModal from '@/app/hooks/useLoginModal';
 import { signOut } from 'next-auth/react';
 import { SafeUser } from '@/app/types';
 import { User } from '@prisma/client';
+import useRentModal from '@/app/hooks/useRentModal';
 
 interface UserMenuProps {
     currentUser?: SafeUser | null;
 }
 
-const UserMenu:React.FC<UserMenuProps> = ({ currentUser }) => {
-	console.log(currentUser)  
+const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
+    console.log(currentUser);
     const registerModal = useRegisterModal();
     const loginModal = useLoginModal();
+	const rentModal = useRentModal();
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleOpen = useCallback(() => {
         setIsOpen((value) => !value);
     }, []);
 
-	const onRent = useCallback(() => {
-		if(!currentUser) {
-			loginModal.onOpen();
-		}
-
-	},[loginModal,currentUser])
+    const onRent = useCallback(() => {
+        if (!currentUser) {
+           return loginModal.onOpen();
+        }
+		rentModal.onOpen();
+    }, [loginModal, currentUser,rentModal]);
     return (
         <div className="relative">
             <div className="flex flex-row items-center gap-3">
@@ -45,7 +47,7 @@ const UserMenu:React.FC<UserMenuProps> = ({ currentUser }) => {
                 >
                     <AiOutlineMenu />
                     <div className="hidden md:block">
-                        <Avatar src={currentUser?.image}/>
+                        <Avatar src={currentUser?.image} />
                     </div>
                 </div>
             </div>
@@ -54,29 +56,26 @@ const UserMenu:React.FC<UserMenuProps> = ({ currentUser }) => {
                     <div className="flex flex-col cursor-pointer">
                         {currentUser ? (
                             <>
+                                <MenuItem onClick={() => {}} label="my trips" />
                                 <MenuItem
-                                    onClick={()=>{}}
-                                    label="my trips"
-                                />
-                                <MenuItem
-                                    onClick={()=>{}}
+                                    onClick={() => {}}
                                     label="my favorites"
                                 />
-								 <MenuItem
-                                    onClick={()=>{}}
+                                <MenuItem
+                                    onClick={() => {}}
                                     label="my reservations"
                                 />
-								 <MenuItem
-                                    onClick={()=>{}}
+                                <MenuItem
+                                    onClick={() => {}}
                                     label="my properties"
                                 />
-								 <MenuItem
-                                    onClick={()=>{}}
+                                <MenuItem
+                                    onClick={() => {}}
                                     label="airbnb my home"
                                 />
-								<hr/>
-								<MenuItem
-                                    onClick={()=>signOut()}
+                                <hr />
+                                <MenuItem
+                                    onClick={() => signOut()}
                                     label="logout"
                                 />
                             </>

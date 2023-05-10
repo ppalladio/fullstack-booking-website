@@ -45,15 +45,17 @@ const RentModal = () => {
             />
             <div className="grid grid-cols-1 md:grid-cols-2 gaps-3 max-h-[50vh] overflow-y-auto">
                 {categories.map((item) => (
-                    <div key={item.label} className="col-span-1">
-                      <CategoryInput
-						onclick={() => {})
-						selected={false}
-						label={item.label}
-						icon={item.icon}
-						/>
-                    </div>
-                ))}
+
+<div key={item.label} className="col-span-1">
+<CategoryInput
+  onClick={() => {}}
+  selected={false}
+  label={item.label}
+  icon={item.icon}
+  />
+</div>
+
+				))}
             </div>
         </div>
     );

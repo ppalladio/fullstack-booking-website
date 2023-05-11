@@ -6,6 +6,7 @@ import Modal from './Modal';
 import Heading from '../Heading';
 import { categories } from '../navbar/Categories';
 import CategoryInput from '../inputs/CategoryInput';
+import { FieldValues, useForm } from 'react-hook-form';
 
 enum STEPS {
     CATEGORY = 0,
@@ -20,6 +21,36 @@ const RentModal = () => {
     const rentModal = useRentModal();
 
     const [step, setStep] = useState(STEPS.CATEGORY);
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        setValue,
+        watch,
+        reset,
+    } = useForm<FieldValues>({
+        defaultValues: {
+            categories: '',
+            location: null,
+            guestCount: 1,
+            roomCount: 1,
+            bathroomCount: 1,
+            imageSrc: '',
+            price: 1,
+            title: '',
+            description: '',
+        },
+    });
+
+	const category = watch('categories');
+
+	const setCustomValue = (id:string,value:any) => {
+		setValue(id,value,{
+			shouldDirty:true,
+			shouldTouch:true,
+			shouldValidate:true,
+		});
+	}
     const onBack = () => setStep((value) => value - 1);
     const onNext = () => setStep((value) => value + 1);
 
@@ -45,17 +76,15 @@ const RentModal = () => {
             />
             <div className="grid grid-cols-1 md:grid-cols-2 gaps-3 max-h-[50vh] overflow-y-auto">
                 {categories.map((item) => (
-
-<div key={item.label} className="col-span-1">
-<CategoryInput
-  onClick={() => {}}
-  selected={false}
-  label={item.label}
-  icon={item.icon}
-  />
-</div>
-
-				))}
+                    <div key={item.label} className="col-span-1">
+                        <CategoryInput
+                            onClick={(category) => setCustomValue('categories', category)}
+                            selected={category == item.label}
+                            label={item.label}
+                            icon={item.icon}
+                        />
+                    </div>
+                ))}
             </div>
         </div>
     );

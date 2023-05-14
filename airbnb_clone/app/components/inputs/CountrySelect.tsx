@@ -27,7 +27,7 @@ const CountrySelect: React.FC<CountrySelectProps> = ({ value, onChange }) => {
                 value={value}
                 onChange={(value) => onChange(value as CountrySelectValue)}
                 formatOptionLabel={(option: any) => (
-                    <div className="flex flex-row items-center gap-s">
+                    <div className="flex flex-row items-center gap-5">
                         <div>{option.flag}</div>
                         <div>
                             {option.label}

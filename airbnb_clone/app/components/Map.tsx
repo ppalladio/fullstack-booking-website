@@ -6,7 +6,7 @@ import 'leaflet/dist/leaflet.css';
 import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
 import markerIcon from 'leaflet/dist/images/marker-icon.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
-import { MapContainer, TileLayer } from 'react-leaflet';
+import { MapContainer, Marker, TileLayer } from 'react-leaflet';
 
 //@ts-ignore
 delete L.Icon.Default.prototype._getIconUrl;
@@ -30,6 +30,9 @@ const Map: React.FC<MapProps> = ({ center }) => {
   <TileLayer
       url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
     />
+	{center && <Marker
+	position={center as L.LatLngExpression}
+	/>}
 
 		</MapContainer>
     );

@@ -48,6 +48,7 @@ const RentModal = () => {
 
     const category = watch('categories');
     const location = watch('location');
+	const guestCount = watch('guestCount');
     const Map = useMemo(
         () => dynamic(() => import('../Map'), { ssr: false }),
         [location],
@@ -124,8 +125,9 @@ const RentModal = () => {
                     subtitle="what amenities do you have?"
                 />
 				<Counter
-				title="Share some basics about your place"
-				subtitle="what amenities do you have?" />
+				title="Guests"
+				subtitle="how many guests do you allow?"
+				value={guestCount} />
             </div>
         );
     }

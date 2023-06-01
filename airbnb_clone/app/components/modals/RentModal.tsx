@@ -195,14 +195,26 @@ const RentModal = () => {
         );
     }
 
-
-	if (step === STEPS.PRICE) {
-		bodyContent=(
-			<div className='flex flex-col gap-8'>
-				
-			</div>
-		)
-	}
+    if (step === STEPS.PRICE) {
+        bodyContent = (
+            <div className="flex flex-col gap-8">
+                <Heading
+                    title="now, set your price"
+                    subtitle="how much do you charge per night?"
+                />
+                <Input
+                    id="price"
+                    label="price"
+                    formatPrice={true}
+                    type="number"
+                    disabled={isLoading}
+                    register={register}
+                    errors={errors}
+                    required
+                />
+            </div>
+        );
+    }
     return (
         <Modal
             isOpen={rentModal.isOpen}

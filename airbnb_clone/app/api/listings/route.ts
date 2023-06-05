@@ -29,7 +29,7 @@ export async function POST(request: Request) {
 			category,
 			roomCount,
 			bathroomCount,
-			guestsCount: guestCount, //@because in prisma scheme, 	guestsCount Int was used instead of guestCount
+			guestCount, 
 			locationValue: location.value,
 			price: parseInt(price, 10),
 			userId: currentUser.id

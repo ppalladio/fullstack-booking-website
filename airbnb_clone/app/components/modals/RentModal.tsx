@@ -40,7 +40,7 @@ const RentModal = () => {
         reset,
     } = useForm<FieldValues>({
         defaultValues: {
-            categories: '',
+            category: '',
             location: null,
             guestCount: 1,
             roomCount: 1,
@@ -52,16 +52,16 @@ const RentModal = () => {
         },
     });
 
-    const category = watch('categories');
     const location = watch('location');
+    const category = watch('category');
     const guestCount = watch('guestCount');
     const roomCount = watch('roomCount');
-    const bathroomCount = watch('bathCount');
+    const bathroomCount = watch('bathroomCount');
     const imageSrc = watch('imageSrc');
 
     const Map = useMemo(
         () => dynamic(() => import('../Map'), { ssr: false }),
-        [location],
+        [],
     );
 
     const setCustomValue = (id: string, value: any) => {
@@ -122,7 +122,7 @@ const RentModal = () => {
                     <div key={item.label} className="col-span-1">
                         <CategoryInput
                             onClick={(category) =>
-                                setCustomValue('categories', category)
+                                setCustomValue('category', category)
                             }
                             selected={category == item.label}
                             label={item.label}
@@ -170,10 +170,10 @@ const RentModal = () => {
                     onChange={(value) => setCustomValue('roomCount', value)}
                 />
                 <Counter
-                    title="Bathrooms"
-                    subtitle="how many Bathrooms do you have?"
-                    value={bathroomCount}
                     onChange={(value) => setCustomValue('bathroomCount', value)}
+                    value={bathroomCount}
+                    title="Bathrooms"
+                    subtitle="How many bathrooms do you have?"
                 />
             </div>
         );
@@ -199,7 +199,7 @@ const RentModal = () => {
             <div className="flex flex-col gap-8">
                 <Heading
                     title="how would you describe your place?"
-                    subtitle="short and sweet works better"
+                    subtitle="short and sweet works best"
                 />
                 <Input
                     id="title"

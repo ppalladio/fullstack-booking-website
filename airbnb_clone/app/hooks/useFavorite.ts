@@ -16,7 +16,6 @@ const useFavorite = ({ listingId, currentUser }: IUseFavoriteProps) => {
 
     const hasFavorited = useMemo(() => {
         const list = currentUser?.favoriteIds || [];
-
         return list.includes(listingId);
     }, [listingId, currentUser]);
 

@@ -1,4 +1,3 @@
-'use client';
 
 import getCurrentUser from '@/app/actions/getCurrentUser';
 import getListingById from '@/app/actions/getListingById';
@@ -8,7 +7,7 @@ import ListingClient from './ListingClient';
 import React from 'react';
 
 interface getListingByIdProps {
-    listingId: string;
+    listingId?: string;
 }
 
 const ListingPage = async ({ params }: { params: getListingByIdProps }) => {
@@ -26,6 +25,7 @@ const ListingPage = async ({ params }: { params: getListingByIdProps }) => {
         <ClientOnly>
             <ListingClient listing={listing} currentUser={currentUser} />
         </ClientOnly>
+
     );
 };
 

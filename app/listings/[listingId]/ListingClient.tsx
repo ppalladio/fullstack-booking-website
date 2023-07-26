@@ -5,15 +5,17 @@ import { categories } from '@/app/components/navbar/Categories';
 import useLoginModal from '@/app/hooks/useLoginModal';
 import { SafeListing, SafeUser } from '@/app/types';
 import { Reservation } from '@prisma/client';
+import axios from 'axios';
 import { eachDayOfInterval } from 'date-fns';
 import { useRouter } from 'next/navigation';
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
+import { toast } from 'react-hot-toast';
 
 const initialDateRange = {
-	startDate: new Date(),
-	endDate: new Date(),
-	key:'selection'
-}
+    startDate: new Date(),
+    endDate: new Date(),
+    key: 'selection',
+};
 interface ListingClientProps {
     reservation?: Reservation[];
     listing: SafeListing & {
@@ -24,23 +26,54 @@ interface ListingClientProps {
 
 const ListingClient: React.FC<ListingClientProps> = ({
     listing,
-	reservation=[],
+    reservation = [],
     currentUser,
 }) => {
+    const loginModal = useLoginModal();
+    const route = useRouter();
 
-	const loginModal = useLoginModal();
-	const route = useRouter();
+    const disabledDates = useMemo(() => {
+        let dates: Date[] = [];
 
-	const disabledDates = useMemo(() => 
-	{let dates:Date[]=[]
-	
-		reservation.forEach((reservation:any) => {
-			const range = eachDayOfInterval(
-				{start: new Date(reservation.start)}
-			);
-		})
-	}
-	, [second])
+        reservation.forEach((reservation) => {
+            const range = eachDayOfInterval({
+                start: new Date(reservation.startDate),
+                end: new Date(reservation.endDate),
+            });
+            dates = [...dates, ...range];
+        });
+
+        return dates;
+    }, [reservation]);
+
+    const [isLoading, setIsLoading] = useState(false);
+    const [totalPrice, setTotalPrice] = useState(listing.price);
+    const [dateRange, setDateRange] = useState(initialDateRange);
+
+    const onCreateReservation = useCallback(() => {
+        if (!currentUser) {
+            return loginModal.onOpen();
+        }
+        setIsLoading(true);
+        axios
+            .post('/api/reservations', {
+                totalPrice: totalPrice,
+                startDate: dateRange.startDate,
+                endDate: dateRange.endDate,
+                listingId: listing?.id,
+            })
+            .then(() => {
+                toast.success('Listing Reserved');
+                setDateRange(initialDateRange);
+            })
+            .catch((err) => {
+                toast.error('Something went wrong');
+            })
+            .finally(() => {
+                setIsLoading(false);
+            });
+    }, [currentUser, totalPrice, dateRange, listing?.id, loginModal]);
+
     const category = useMemo(() => {
         return categories.find((item) => {
             item.label === listing.category;

@@ -1,10 +1,10 @@
-
 import getCurrentUser from '@/app/actions/getCurrentUser';
 import getListingById from '@/app/actions/getListingById';
 import ClientOnly from '@/app/components/ClientOnly';
 import EmptyState from '@/app/components/EmptyState';
 import ListingClient from './ListingClient';
 import React from 'react';
+import getReservations from '@/app/actions/getReservations';
 
 interface getListingByIdProps {
     listingId?: string;
@@ -12,6 +12,7 @@ interface getListingByIdProps {
 
 const ListingPage = async ({ params }: { params: getListingByIdProps }) => {
     const listing = await getListingById(params);
+    const reservations = await getReservations(params);
     const currentUser = await getCurrentUser();
 
     if (!listing) {
@@ -23,10 +24,12 @@ const ListingPage = async ({ params }: { params: getListingByIdProps }) => {
     }
     return (
         <ClientOnly>
-            <ListingClient listing={listing} currentUser={currentUser} />
+            <ListingClient
+                listing={listing}
+                reservations={reservations} 
+                currentUser={currentUser}
+            />
         </ClientOnly>
-
     );
 };
-
 export default ListingPage;

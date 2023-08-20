@@ -16,7 +16,7 @@ import useLoginModal from '@/app/hooks/useLoginModal';
 
 const RegisterModal = () => {
     const registerModal = useRegisterModal();
-	const loginModal = useLoginModal();
+    const loginModal = useLoginModal();
     const [isLoading, setIsLoading] = useState(false);
     const {
         register,
@@ -35,23 +35,22 @@ const RegisterModal = () => {
         axios
             .post('/api/register', data)
             .then(() => {
+                toast.success('Registration successful');
                 registerModal.onClose();
+                loginModal.onOpen();
             })
-            .catch((error) => {
+            .catch(() => {
                 toast.error('error');
             })
             .finally(() => {
                 setIsLoading(false);
             });
     };
-	const toggle = useCallback(
-		() => {
-		  registerModal.onClose();
-		  loginModal.onOpen()
-		},
-		[loginModal, registerModal],
-	  )
-	  
+    const toggle = useCallback(() => {
+        registerModal.onClose();
+        loginModal.onOpen();
+    }, [loginModal, registerModal]);
+
     const bodyContent = (
         <div className="flex flex-col gap-4 capitalize">
             <Heading title="welcome to airbnb" subtitle="create an account" />

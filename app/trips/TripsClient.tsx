@@ -21,12 +21,13 @@ const TripsClient: React.FC<TripsClientProps> = ({
         (id: string) => {
             setDeletingId(id);
             axios
-                .delete(`'/api/reservations/${id}`)
+                .delete(`/api/reservations/${id}`)
                 .then(() => {
                     toast.success('Reservation deleted');
                     router.refresh();
                 })
                 .catch((err) => {
+                    console.log(err);
                     toast.error(err?.response?.data?.error);
                 })
                 .finally(() => {

@@ -17,11 +17,11 @@ interface UserMenuProps {
 }
 
 const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
-	const router = useRouter()
+    const router = useRouter();
     console.log(currentUser);
     const registerModal = useRegisterModal();
     const loginModal = useLoginModal();
-	const rentModal = useRentModal();
+    const rentModal = useRentModal();
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleOpen = useCallback(() => {
@@ -30,10 +30,10 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
 
     const onRent = useCallback(() => {
         if (!currentUser) {
-           return loginModal.onOpen();
+            return loginModal.onOpen();
         }
-		rentModal.onOpen();
-    }, [loginModal, currentUser,rentModal]);
+        rentModal.onOpen();
+    }, [loginModal, currentUser, rentModal]);
     return (
         <div className="relative">
             <div className="flex flex-row items-center gap-3">
@@ -58,13 +58,16 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
                     <div className="flex flex-col cursor-pointer">
                         {currentUser ? (
                             <>
-                                <MenuItem onClick={() => router.push('/trips')} label="my trips" />
+                                <MenuItem
+                                    onClick={() => router.push('/trips')}
+                                    label="my trips"
+                                />
                                 <MenuItem
                                     onClick={() => {}}
                                     label="my favorites"
                                 />
                                 <MenuItem
-                                    onClick={() => {}}
+                                    onClick={() => router.push('/reservations')}
                                     label="my reservations"
                                 />
                                 <MenuItem

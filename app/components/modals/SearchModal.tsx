@@ -10,6 +10,8 @@ import qs from 'query-string';
 import { formatISO } from 'date-fns';
 import { stringify } from 'querystring';
 import Heading from '../Heading';
+import Calendar from '../inputs/Calendar';
+import Counter from '../inputs/Counter';
 enum STEPS {
     LOCATION = 0,
     DATE = 1,
@@ -42,7 +44,7 @@ const SearchModal = () => {
     }, []);
 
     const onSubmit = useCallback(async () => {
-        if (step === STEPS.INFO) {
+        if (step !== STEPS.INFO) {
             return onNext();
         }
         let currentQuery = {};
@@ -112,18 +114,63 @@ const SearchModal = () => {
                     setLocation(value as CountrySelectValue);
                 }}
             />
-			<hr />
-		<Map center={location?.latlng}/>
+            <hr />
+            <Map center={location?.latlng} />
         </div>
     );
+
+    if (step === STEPS.DATE) {
+        bodyContent = (
+            <div className="flex flex-col gap-8">
+                <Heading
+                    title="when do you plan to go?"
+                    subtitle="make sure everyone is free."
+                />
+                <Calendar
+                    value={dateRange}
+                    onChange={(value) => setDateRange(value.selection)}
+                />
+            </div>
+        );
+    }
+    if (step === STEPS.INFO) {
+        bodyContent = (
+            <div className="flex flex-col gap-8">
+                <Heading
+                    title="more information"
+                    subtitle="find your perfect place"
+                />
+                <Counter
+                    title="guests"
+                    subtitle="how many guests are coming"
+                    value={guestCount}
+                    onChange={(value) => setGuestCount(value)}
+                />
+                <Counter
+                    title="rooms"
+                    subtitle="how many rooms do you need"
+                    value={roomCount}
+                    onChange={(value) => setRoomCount(value)}
+                />
+                <Counter
+                    title="guests"
+                    subtitle="how many guests are coming"
+                    value={guestCount}
+                    onChange={(value) => setGuestCount(value)}
+                />
+            </div>
+        );
+    }
     return (
         <Modal
             isOpen={searchModal.isOpen}
             onClose={searchModal.onClose}
-            onSubmit={searchModal.onOpen}
+            onSubmit={onSubmit}
             title="Filters"
-            actionLabel="Search"
-			body={bodyContent}
+            actionLabel={actionLabel}
+            secondaryActionLabel={secondaryActionLabel}
+            secondaryAction={step === STEPS.LOCATION ? undefined : onBack}
+            body={bodyContent}
         />
     );
 };

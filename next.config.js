@@ -11,7 +11,7 @@ const nextConfig = {
             'res.cloudinary.com',
         ],
     },
-    basePath: '/airbnb-clone',
+    // basePath: '/airbnb-clone',
 };
 
 module.exports = nextConfig;

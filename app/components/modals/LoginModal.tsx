@@ -97,7 +97,7 @@ const toggle = useCallback(
             />
             <div className="text-neutral-500 text-center mt-4 font-light">
                 <div className="flex flex-row items-center gap-2 capitalize justify-center">
-                    <div>First time using airbnb?</div>
+                    <div>First time?</div>
                     <div
                         onClick={toggle}
                         className="text-neutral-800 capitalize cursor-pointer hover:underline"

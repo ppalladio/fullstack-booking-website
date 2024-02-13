@@ -45,7 +45,7 @@ const Search = () => {
     return (
         <div
             onClick={searchModal.onOpen}
-            className="border-[1px] w-full md:w-auto py-2 rounded-full shadow-sm hover:shadow-md cursor-pointer transition"
+            className="border-[1px]  w-full md:w-auto py-2 rounded-full shadow-sm hover:shadow-md cursor-pointer transition"
         >
             <div className="flex flex-row items-center justify-between">
                 <div className="text-sm font-semibold px-6 capitalize">

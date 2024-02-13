@@ -53,7 +53,7 @@ const RegisterModal = () => {
 
     const bodyContent = (
         <div className="flex flex-col gap-4 capitalize">
-            <Heading title="welcome to airbnb" subtitle="create an account" />
+            <Heading title="Welcome" subtitle="create an account" />
             <Input
                 id="email"
                 label="email"

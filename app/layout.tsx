@@ -11,8 +11,8 @@ import RentModal from './components/modals/RentModal';
 import SearchModal from './components/modals/SearchModal';
 import Footer from './components/Footer';
 export const metadata = {
-    title: 'Airbnb',
-    description: 'Airbnb Clone',
+    title: 'FullStack Booking',
+    description: 'FullStack Booking',
 };
 const font = Montserrat({
     subsets: ['latin'],

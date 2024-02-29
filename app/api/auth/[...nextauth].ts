@@ -1,18 +1,26 @@
-import bcrypt from 'bcrypt';
-import NextAuth, { AuthOptions } from 'next-auth';
-import CredentialsProvider from 'next-auth/providers/credentials';
+import { PrismaAdapter } from '@next-auth/prisma-adapter';
+import { AuthOptions } from 'next-auth';
+import prisma from '@/app/libs/prismadb';
 import GithubProvider from 'next-auth/providers/github';
 import GoogleProvider from 'next-auth/providers/google';
-import { PrismaAdapter } from '@next-auth/prisma-adapter';
-
-import prisma from '@/app/libs/prismadb';
-
+import CredentialsProvider from 'next-auth/providers/credentials';
+import bcrypt from 'bcrypt';
+import NextAuth from 'next-auth';
+let github_id;
+let github_secret;
+if (process.env.NODE_ENV === 'production') {
+    github_id = process.env.GITHUB_ID_PROD;
+    github_secret = process.env.GITHUB_SECRET_PROD;
+} else {
+    github_id = process.env.GITHUB_ID;
+    github_secret = process.env.GITHUB_SECRET;
+}
 export const authOptions: AuthOptions = {
     adapter: PrismaAdapter(prisma),
     providers: [
         GithubProvider({
-            clientId: process.env.GITHUB_ID as string,
-            clientSecret: process.env.GITHUB_SECRET as string,
+            clientId: github_id as string,
+            clientSecret: github_secret as string,
         }),
         GoogleProvider({
             clientId: process.env.GOOGLE_CLIENT_ID as string,

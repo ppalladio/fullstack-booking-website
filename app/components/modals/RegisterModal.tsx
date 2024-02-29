@@ -85,7 +85,7 @@ const RegisterModal = () => {
     const footerContent = (
         <div className="flex-col flex gap-4 mt-3 capitalize">
             <hr />
-            <Button
+            {/* <Button
                 outline
                 label="continue with google"
                 icon={FcGoogle}
@@ -96,7 +96,7 @@ const RegisterModal = () => {
                 label="continue with github"
                 icon={AiFillGithub}
                 onClick={() => signIn('github')}
-            />
+            /> */}
             <div className="text-neutral-500 text-center mt-4 font-light">
                 <div className="flex flex-row items-center gap-2 capitalize justify-center">
                     <div>already have an account?</div>
